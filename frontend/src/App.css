@@ -1,0 +1,48 @@
+
+.top-container {
+  display: grid;
+  grid-column-start: 11;  
+  overflow-y: auto;
+  bottom: 20px; /* Adjust based on desired distance from bottom */
+  z-index: 1000; /* Ensures it's above other content */
+
+}
+
+.chatbot-container {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 16px;
+  height: calc(100vh - 200px); /* Adjust the height as needed with padding */
+  width: 500px;
+  margin: 20px auto; /* Adjusted to add some padding from the top and bottom */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #f8f8f8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* To ensure the border-radius is respected */
+  min-height: 200px;
+  position:relative
+}
+
+.chatbot-messages {
+  overflow-y: auto;
+  padding: 8px;
+}
+.message {
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.user-message {
+  background-color: #007bff;
+  color: #fff;
+  text-align: right;
+}
+.ai-message {
+  background-color: #f0f0f0;
+  text-align: left;
+}
+
