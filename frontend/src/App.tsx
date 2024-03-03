@@ -3,7 +3,7 @@ import "./App.css";
 import { IconButton } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import { ChatContainer } from "./components/chat/ChatContainer/ChatContainer";
-import { useWebSocket } from "./hooks/useWebSocket";
+import { useWebSocket } from "./components/hooks/useWebSocket";
 
 interface IMessage {
   user?: boolean;

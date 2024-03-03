@@ -41,6 +41,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
             # Process the received content
             result = chain({"content": content, "messages": []})
+            print(result)
             text = result["text"]
 
             # Send the response back to the frontend
