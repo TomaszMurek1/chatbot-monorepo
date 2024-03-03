@@ -4,10 +4,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ChatInputForm } from "../ChatInputForm/ChatInputForm";
 
 interface ChatContainerProps {
-  isOpen: boolean;
+  messages: any;
   ws: any;
   closeChat: () => void;
-  messages: any;
 }
 
 export const ChatContainer: React.FC<ChatContainerProps> = ({
