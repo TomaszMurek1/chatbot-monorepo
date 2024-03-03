@@ -1,20 +1,24 @@
 import { Button, TextField } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 interface ChatInputFormProps {
   inputText: string;
-  handleInputChange: any;
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   sendMessage: () => void;
 }
+
+const InputFormContainer = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  marginRight: "8px",
+});
 
 export const ChatInputForm: React.FC<ChatInputFormProps> = ({
   inputText,
   handleInputChange,
   sendMessage,
 }) => (
-  <div
-    className="chatbot-input-form"
-    style={{ display: "flex", alignItems: "center" }}
-  >
+  <InputFormContainer>
     <TextField
       fullWidth
       value={inputText}
@@ -28,5 +32,5 @@ export const ChatInputForm: React.FC<ChatInputFormProps> = ({
     <Button variant="contained" color="primary" onClick={sendMessage}>
       Send
     </Button>
-  </div>
+  </InputFormContainer>
 );

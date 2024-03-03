@@ -5,7 +5,7 @@ interface IMessage {
 }
 export const useWebSocket = () => {
   const [ws, setWs] = useState<WebSocket | null>(null);
-  const [messages, setMessages] = useState<IMessage[]>([]);
+  const [messages, setMessages] = useState<string[]>([]);
 
   const connectWebSocket = useCallback(() => {
     const newWs = new WebSocket("ws://localhost:8000/ws");

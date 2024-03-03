@@ -1,45 +1,46 @@
-import React, { useState } from "react";
-import { IconButton } from "@mui/material";
+import React, { useMemo, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ChatInputForm } from "../ChatInputForm/ChatInputForm";
+import { ChatContainerWrapper, StyledIconButton } from "./ChatContainerStyles";
+
+interface IMessage {
+  user?: boolean;
+  text: string;
+}
 
 interface ChatContainerProps {
-  messages: any;
-  ws: any;
+  messages: string[];
+  ws: WebSocket | null;
   closeChat: () => void;
 }
+
+const ChatMessages = React.memo(({ messages }: { messages: string[] }) => (
+  <div className="chatbot-messages">
+    {messages.map((message, index) => (
+      <div
+        key={index}
+        className={`message ${message ? "user-message" : "ai-message"}`}
+      >
+        {message}
+      </div>
+    ))}
+  </div>
+));
 
 export const ChatContainer: React.FC<ChatContainerProps> = ({
   ws,
   closeChat,
   messages,
 }) => {
-  const [chatText, setChatText] = useState("");
+  const [chatText, setChatText] = useState<string>("");
 
-  console.log("messages2", messages);
-  const ChatMessages = () => (
-    <div className="chatbot-messages">
-      {messages.map((message: any, index: any) => {
-        console.log(message);
-        return (
-          <div
-            key={index}
-            className={`message ${
-              message.user ? "user-message" : "ai-message"
-            }`}
-          >
-            {message}
-          </div>
-        );
-      })}
-    </div>
-  );
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setChatText(event.target.value);
   };
 
-  const sendMessage = () => {
+  const sendMessage = (): void => {
     if (ws && ws.readyState === WebSocket.OPEN && chatText.trim()) {
       ws.send(chatText);
       setChatText(""); // Clear input after sending
@@ -47,25 +48,16 @@ export const ChatContainer: React.FC<ChatContainerProps> = ({
   };
 
   return (
-    <div className="chatbot-container ">
-      <IconButton
-        color="primary"
-        style={{
-          color: "gray",
-          position: "absolute",
-          right: 8,
-          top: 8,
-        }}
-        onClick={closeChat}
-      >
+    <ChatContainerWrapper>
+      <StyledIconButton color="primary" onClick={closeChat}>
         <CloseIcon />
-      </IconButton>
-      <ChatMessages />
+      </StyledIconButton>
+      <ChatMessages messages={messages} />
       <ChatInputForm
         inputText={chatText}
         handleInputChange={handleInputChange}
         sendMessage={sendMessage}
       />
-    </div>
+    </ChatContainerWrapper>
   );
 };
