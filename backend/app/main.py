@@ -5,8 +5,9 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
 import warnings
-import os
 from dotenv import load_dotenv
+
+from utilities.ask_chroma import ask_chroma
 
 load_dotenv()
 
@@ -37,11 +38,13 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             # Receive message from frontend
             data = await websocket.receive_text()
-            content = data  # Assuming the frontend sends a plain text string
+            user_input = data  # Assuming the frontend sends a plain text string
 
             # Process the received content
-            result = chain({"content": content, "messages": []})
-            text = result["text"]
+
+            result = ask_chroma(user_input)
+            print(result)
+            text = result
 
             # Send the response back to the frontend
             await websocket.send_text(f"Response: {text}")

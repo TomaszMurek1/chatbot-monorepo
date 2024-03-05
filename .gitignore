@@ -3,6 +3,7 @@
 # dependencies
 /frontend/node_modules
 /backend/venv/
+/database/chroma/emb
 /.pnp
 .pnp.js
 .vscode
@@ -23,3 +24,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+*.pyc
+*.txt
+*.sqlite3
+__pycache__/
